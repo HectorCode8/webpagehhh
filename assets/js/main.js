@@ -74,12 +74,18 @@ if (themeButton) {
   // We obtain the current theme that the interface has by validating the dark-theme class
   const getCurrentTheme = () => (document.body.classList.contains(darkTheme) ? 'dark' : 'light');
   const getCurrentIcon = () => (themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line');
+  const setThemeAria = () => {
+    const isDark = getCurrentTheme() === 'dark';
+    themeButton.setAttribute('aria-pressed', String(isDark));
+    themeButton.setAttribute('aria-label', isDark ? 'Desactivar tema oscuro' : 'Activar tema oscuro');
+  };
 
   // We validate if the user previously chose a topic
   if (selectedTheme) {
     // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
     document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
     themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme);
+  setThemeAria();
   }
 
   // Activate / deactivate the theme manually with the button
@@ -90,6 +96,15 @@ if (themeButton) {
     // We save the theme and the current icon that the user chose
     localStorage.setItem('selected-theme', getCurrentTheme());
     localStorage.setItem('selected-icon', getCurrentIcon());
+    setThemeAria();
+  });
+
+  // Activación con teclado (Enter/Espacio)
+  themeButton.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      themeButton.click();
+    }
   });
 }
 
@@ -111,4 +126,35 @@ if (!prefersReducedMotion && typeof ScrollReveal !== 'undefined') {
   sr.reveal(`.profile__buttons`, { delay: 800 });
   sr.reveal(`.filters__content`, { delay: 900 });
   sr.reveal(`.filters`, { delay: 1000 });
+}
+
+/*=============== PROJECT CARDS CLICKABLE + KEYBOARD ===============*/
+document.querySelectorAll('.projects__card[data-href]').forEach((card) => {
+  const url = card.getAttribute('data-href');
+  const open = () => window.open(url, '_blank', 'noopener');
+  card.addEventListener('click', (e) => {
+    // Evitar doble apertura si se hace click en el botón interno
+    if ((e.target.closest && e.target.closest('a')) || e.defaultPrevented) return;
+    open();
+  });
+  card.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      open();
+    }
+  });
+});
+
+/*=============== BACK TO TOP BUTTON ===============*/
+const backToTop = document.getElementById('back-to-top');
+if (backToTop) {
+  const toggleBtn = () => {
+    const y = window.scrollY || document.documentElement.scrollTop;
+    backToTop.classList.toggle('show', y > 400);
+  };
+  toggleBtn();
+  window.addEventListener('scroll', toggleBtn, { passive: true });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 }

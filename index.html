@@ -74,13 +74,13 @@
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="assets/css/styles.css" />
 
-    <title>Web Page Héctor Haro H</title>
+  <title>Portafolio — Héctor Haro H</title>
   </head>
   <body>
   <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
     <!--=============== HEADER ===============-->
     <header class="profile container">
-      <i class="ri-moon-line change-theme" id="theme-button"></i>
+      <i class="ri-moon-line change-theme" id="theme-button" role="button" aria-pressed="false" aria-label="Activar tema oscuro" tabindex="0"></i>
 
       <div class="profile__container grid">
         <div class="profile__data">
@@ -98,7 +98,7 @@
             </div>
           </div>
           <h1 class="profile__name">Héctor Haro Hermosillo</h1>
-          <h3 class="profile__profession">Software Engineer</h3>
+          <h3 class="profile__profession">Ingeniero de Software</h3>
           <ul class="profile__social">
             <a
               href="https://www.instagram.com/hector.haro.hermosillo/"
@@ -151,15 +151,15 @@
         <div class="profile__info grid">
           <div class="profile__info-group">
             <h3 class="profile__info-number">4</h3>
-            <p class="profile__info-description">Years of <br />work</p>
+            <p class="profile__info-description">Años de <br />experiencia</p>
           </div>
           <div class="profile__info-group">
             <h3 class="profile__info-number">+25</h3>
-            <p class="profile__info-description">Completed <br />projects</p>
+            <p class="profile__info-description">Proyectos <br />completados</p>
           </div>
           <div class="profile__info-group">
             <h3 class="profile__info-number">+30</h3>
-            <p class="profile__info-description">Satisfied <br />customers</p>
+            <p class="profile__info-description">Clientes <br />satisfechos</p>
           </div>
         </div>
 
@@ -170,7 +170,7 @@
             href="assets/pdf/CV Haro Hermosillo Hector.pdf"
             class="button"
             >
-            Download CV <i class="ri-download-line"></i>
+            Descargar CV <i class="ri-download-line"></i>
           </a>
 
           <div class="profile__buttons-small">
@@ -210,7 +210,7 @@
             aria-selected="true"
             tabindex="0"
           >
-            Projects
+            Proyectos
           </button>
           <button
             role="tab"
@@ -221,7 +221,7 @@
             aria-selected="false"
             tabindex="-1"
           >
-            Skills
+            Habilidades
           </button>
         </ul>
 
@@ -235,33 +235,8 @@
             aria-labelledby="tab-projects"
             tabindex="0"
           >
-            <article class="projects__card">
-              <img
-                src="assets/img/nosotros.jpg"
-                alt="Vista previa de GuitarApp"
-                loading="lazy"
-                decoding="async"
-                width="800"
-                height="500"
-                class="projects__img"
-              />
 
-              <div class="projects__modal">
-                <div>
-                  <span class="projects__subtitle">Responsive</span>
-                  <h3 class="projects__title">GuitarApp</h3>
-                  <a
-                    href="https://guitar-app-three.vercel.app/"
-                    class="projects__button button button__small"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    ><i class="ri-link"></i
-                  ></a>
-                </div>
-              </div>
-            </article>
-
-            <article class="projects__card">
+            <article class="projects__card" data-href="https://hhhcryptoapp.vercel.app/" role="link" tabindex="0" aria-label="Abrir Crypto App">
               <img
                 src="assets/img/crypto.png"
                 alt="Vista previa de Crypto App"
@@ -274,7 +249,7 @@
 
               <div class="projects__modal">
                 <div>
-                  <span class="projects__subtitle">Responsive</span>
+                  <span class="projects__subtitle">Responsivo</span>
                   <h3 class="projects__title">Crypto App</h3>
                   <a
                     href="https://hhhcryptoapp.vercel.app/"
@@ -287,7 +262,7 @@
               </div>
             </article>
 
-            <article class="projects__card">
+            <article class="projects__card" data-href="https://mascotasapp.netlify.app/" role="link" tabindex="0" aria-label="Abrir Veterinary App">
               <img
                 src="assets/img/project1.jpg"
                 alt="Vista previa de Veterinary App"
@@ -313,7 +288,7 @@
               </div>
             </article>
 
-            <article class="projects__card">
+            <article class="projects__card" data-href="https://covidapp2025.netlify.app/" role="link" tabindex="0" aria-label="Abrir Covid App">
               <img
                 src="assets/img/project3.jpg"
                 alt="Vista previa de Covid App"
@@ -326,7 +301,7 @@
 
               <div class="projects__modal">
                 <div>
-                  <span class="projects__subtitle">Responsive</span>
+                  <span class="projects__subtitle">Responsivo</span>
                   <h3 class="projects__title">Covid App</h3>
                   <a
                     href="https://covidapp2025.netlify.app/"
@@ -339,7 +314,7 @@
               </div>
             </article>
 
-            <article class="projects__card">
+            <article class="projects__card" data-href="https://new-weather-app22.vercel.app/" role="link" tabindex="0" aria-label="Abrir Weather app">
               <img
                 src="assets/img/w1.png"
                 alt="Vista previa de Weather App"
@@ -352,7 +327,7 @@
 
               <div class="projects__modal">
                 <div>
-                  <span class="projects__subtitle">Responsive</span>
+                  <span class="projects__subtitle">Responsivo</span>
                   <h3 class="projects__title">Weather app</h3>
                   <a
                     href="https://new-weather-app22.vercel.app/"
@@ -365,7 +340,7 @@
               </div>
             </article>
 
-            <article class="projects__card">
+            <article class="projects__card" data-href="https://crypto-cotizacion.vercel.app/" role="link" tabindex="0" aria-label="Abrir Crypto Search">
               <img
                 src="assets/img/imagen-criptos.png"
                 alt="Vista previa de Crypto Search"
@@ -410,7 +385,7 @@
 
                     <div>
                       <h3 class="skills__name">HTML</h3>
-                      <span class="skills__level">Advanced</span>
+                      <span class="skills__level">Avanzado</span>
                     </div>
                   </div>
 
@@ -419,7 +394,7 @@
 
                     <div>
                       <h3 class="skills__name">CSS</h3>
-                      <span class="skills__level">Advanced</span>
+                      <span class="skills__level">Avanzado</span>
                     </div>
                   </div>
 
@@ -428,7 +403,7 @@
 
                     <div>
                       <h3 class="skills__name">JavaScript</h3>
-                      <span class="skills__level">Advanced</span>
+                      <span class="skills__level">Avanzado</span>
                     </div>
                   </div>
                 </div>
@@ -465,7 +440,7 @@
             </div>
 
             <div class="skills__area">
-              <h3 class="skills__title">+ Skills</h3>
+              <h3 class="skills__title">Otras habilidades</h3>
 
               <div class="skills__box">
                 <div class="skills__group">
@@ -474,7 +449,7 @@
 
                     <div>
                       <h3 class="skills__name">Redux</h3>
-                      <span class="skills__level">Intermediate</span>
+                      <span class="skills__level">Intermedio</span>
                     </div>
                   </div>
 
@@ -483,7 +458,7 @@
 
                     <div>
                       <h3 class="skills__name">React Router</h3>
-                      <span class="skills__level">Intermediate</span>
+                      <span class="skills__level">Intermedio</span>
                     </div>
                   </div>
 
@@ -492,7 +467,7 @@
 
                     <div>
                       <h3 class="skills__name">Adobe Photoshop</h3>
-                      <span class="skills__level">Advance</span>
+                      <span class="skills__level">Avanzado</span>
                     </div>
                   </div>
                 </div>
@@ -503,7 +478,7 @@
 
                     <div>
                       <h3 class="skills__name">MySQL</h3>
-                      <span class="skills__level">Basic</span>
+                      <span class="skills__level">Básico</span>
                     </div>
                   </div>
 
@@ -512,8 +487,8 @@
                       <i class="ri-checkbox-circle-line"></i>
 
                       <div>
-                        <h3 class="skills__name">Node JS</h3>
-                        <span class="skills__level">Intermediate</span>
+                        <h3 class="skills__name">Node.js</h3>
+                        <span class="skills__level">Intermedio</span>
                       </div>
                     </div>
 
@@ -521,8 +496,8 @@
                       <i class="ri-checkbox-circle-line"></i>
 
                       <div>
-                        <h3 class="skills__name">Adobe Premier</h3>
-                        <span class="skills__level">Intermediate</span>
+                        <h3 class="skills__name">Adobe Premiere</h3>
+                        <span class="skills__level">Intermedio</span>
                       </div>
                     </div>
                   </div>
@@ -543,9 +518,13 @@
           <a href="tel:+523411600351">(+52) 341 160 0351</a>
         </p>
         <br />
-        &#169; Héctor HH. All rights reserved
+  &#169; Héctor HH. Todos los derechos reservados
       </span>
     </footer>
+    <!-- Botón: Volver arriba -->
+    <button id="back-to-top" class="back-to-top" type="button" aria-label="Volver arriba">
+      <i class="ri-arrow-up-line" aria-hidden="true"></i>
+    </button>
     <script src="assets/js/scrollreveal.min.js"></script>
     <script src="assets/js/main.js"></script>
   </body>
