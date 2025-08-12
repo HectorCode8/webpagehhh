@@ -94,7 +94,8 @@ if (themeButton) {
 }
 
 /*=============== SCROLL REVEAL ANIMATION ===============*/
-if (typeof ScrollReveal !== 'undefined') {
+const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!prefersReducedMotion && typeof ScrollReveal !== 'undefined') {
   const sr = ScrollReveal({
     origin: 'top',
     distance: '60px',
