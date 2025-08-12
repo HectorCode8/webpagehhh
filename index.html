@@ -12,6 +12,20 @@
       name="description"
       content="Portafolio de Héctor Haro Hermosillo, Software Engineer. Proyectos web, React, JavaScript, y más. Contacto: hector8.haro@gmail.com, (+52) 341 160 0351."
     />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#2FA4FF" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Héctor Haro Hermosillo — Software Engineer" />
+    <meta
+      property="og:description"
+      content="Portafolio de Héctor Haro Hermosillo, Software Engineer. Proyectos web, React, JavaScript, y más."
+    />
+    <meta property="og:image" content="assets/img/Yo3.jpg" />
+    <meta property="og:locale" content="es_MX" />
+    <!-- Sugerido: establecer también og:url una vez desplegado -->
+    <!-- <link rel="canonical" href="https://TU-DOMINIO.com/" /> -->
 
     <!-- Optimización de fuentes: preconnect + link con display=swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,6 +50,7 @@
     <title>Web Page Héctor Haro H</title>
   </head>
   <body>
+  <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
     <!--=============== HEADER ===============-->
     <header class="profile container">
       <i class="ri-moon-line change-theme" id="theme-button"></i>
@@ -45,7 +60,14 @@
           <div class="profile__border">
             <div class="profile__perfil">
               <!-- Insert your image, according to the example size of the portfolio -->
-              <img src="assets/img/Yo3.jpg" alt="Foto de Héctor Haro Hermosillo" />
+              <img
+                src="assets/img/Yo3.jpg"
+                alt="Foto de Héctor Haro Hermosillo"
+                width="120"
+                height="120"
+                decoding="async"
+                fetchpriority="high"
+              />
             </div>
           </div>
           <h1 class="profile__name">Héctor Haro Hermosillo</h1>
@@ -149,7 +171,7 @@
     </header>
 
     <!--=============== MAIN ===============-->
-    <main class="main">
+  <main id="main-content" class="main">
       <section class="filters container">
         <ul class="filters__content" role="tablist" aria-label="Contenido del portafolio">
           <button
@@ -191,6 +213,7 @@
                 src="assets/img/nosotros.jpg"
                 alt="Vista previa de GuitarApp"
                 loading="lazy"
+                decoding="async"
                 class="projects__img"
               />
 
@@ -214,6 +237,7 @@
                 src="assets/img/crypto.png"
                 alt="Vista previa de Crypto App"
                 loading="lazy"
+                decoding="async"
                 class="projects__img"
               />
 
@@ -237,6 +261,7 @@
                 src="assets/img/project1.jpg"
                 alt="Vista previa de Veterinary App"
                 loading="lazy"
+                decoding="async"
                 class="projects__img"
               />
 
@@ -260,6 +285,7 @@
                 src="assets/img/project3.jpg"
                 alt="Vista previa de Covid App"
                 loading="lazy"
+                decoding="async"
                 class="projects__img"
               />
 
@@ -283,6 +309,7 @@
                 src="assets/img/w1.png"
                 alt="Vista previa de Weather App"
                 loading="lazy"
+                decoding="async"
                 class="projects__img"
               />
 
@@ -306,6 +333,7 @@
                 src="assets/img/imagen-criptos.png"
                 alt="Vista previa de Crypto Search"
                 loading="lazy"
+                decoding="async"
                 class="projects__img"
               />
 
