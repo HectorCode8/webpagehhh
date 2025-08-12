@@ -1,0 +1,103 @@
+﻿Diagnose log at 2025-08-12T21:08:27Z
+
+AppPath: C:\Program Files\Git\mingw64\bin\git-credential-manager.exe
+InstallDir: C:\Program Files\Git\mingw64\bin\
+Version: 2.6.1+786ab03440ddc82e807a97c0e540f5247e44cec6
+
+------------
+Diagnostic: Environment
+Skipped: False
+Success: True
+Exception: None
+Log:
+OSType: Windows
+OSVersion: 10.0 (build 26100)
+Reading environment variables... OK
+ Variables:
+HOMEPATH=\Users\hecto
+DriverData=C:\Windows\System32\Drivers\DriverData
+COMPUTERNAME=ALIEN
+GIT_TRACE2_PARENT_SID=7d93de4a-5083-473d-aec8-a50e8219daa0
+CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+OneDrive=C:\Users\hecto\OneDrive
+SESSIONNAME=Console
+LANG=es_ES.UTF-8
+TMP=C:\Users\hecto\AppData\Local\Temp
+EFC_12368_1262719628=1
+EFC_12368_3789132940=1
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+GIT_ASKPASS=c:\Users\hecto\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\askpass.sh
+GIT_EXEC_PATH=C:/Program Files/Git/mingw64/libexec/git-core
+TEMP=C:\Users\hecto\AppData\Local\Temp
+LOCALAPPDATA=C:\Users\hecto\AppData\Local
+MSYSTEM=MINGW64
+TERM=xterm-256color
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 154 Stepping 3, GenuineIntel
+COLORTERM=truecolor
+EFC_12368_2775293581=1
+USERDOMAIN=ALIEN
+ProgramFiles(x86)=C:\Program Files (x86)
+PROCESSOR_REVISION=9a03
+Path=C:/Program Files/Git/mingw64/libexec/git-core;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\hecto\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Users\hecto\AppData\Local\Microsoft\WindowsApps;C:\Users\hecto\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Users\hecto\AppData\Local\Programs\Ollama;C:\Users\hecto\AppData\Roaming\npm;c:\Users\hecto\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand
+TERM_PROGRAM=vscode
+PROCESSOR_LEVEL=6
+NUMBER_OF_PROCESSORS=20
+TMPDIR=C:\Users\hecto\AppData\Local\Temp
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=
+TERM_PROGRAM_VERSION=1.103.0
+VSCODE_GIT_ASKPASS_MAIN=c:\Users\hecto\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\askpass-main.js
+PSModulePath=C:\Users\hecto\OneDrive\Documentos\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+PUBLIC=C:\Users\Public
+VSCODE_GIT_IPC_HANDLE=\\.\pipe\vscode-git-288242a140-sock
+FPS_BROWSER_USER_PROFILE_STRING=Default
+CommonProgramFiles=C:\Program Files (x86)\Common Files
+VSCODE_INJECTION=1
+VSCODE_NONCE=22d363fa-ca94-4bb3-8c73-dd0968d13066
+CHROME_CRASHPAD_PIPE_NAME=\\.\pipe\crashpad_21024_EAMJRNVIGWFTXCSL
+PLINK_PROTOCOL=ssh
+ProgramData=C:\ProgramData
+ProgramW6432=C:\Program Files
+GIT_PAGER=cat
+ProgramFiles=C:\Program Files (x86)
+EFC_12368_1592913036=1
+VSCODE_GIT_ASKPASS_NODE=C:\Users\hecto\AppData\Local\Programs\Microsoft VS Code\Code.exe
+SystemRoot=C:\WINDOWS
+ORIGINAL_XDG_CURRENT_DESKTOP=undefined
+HOME=C:\Users\hecto
+VSCODE_STABLE=1
+CommonProgramW6432=C:\Program Files\Common Files
+ZES_ENABLE_SYSMAN=1
+LOGONSERVER=\\ALIEN
+USERPROFILE=C:\Users\hecto
+EFC_12368_2283032206=1
+USERDOMAIN_ROAMINGPROFILE=ALIEN
+APPDATA=C:\Users\hecto\AppData\Roaming
+HOMEDRIVE=C:
+USERNAME=hecto
+PROCESSOR_ARCHITEW6432=AMD64
+FPS_BROWSER_APP_PROFILE_STRING=Internet Explorer
+PROCESSOR_ARCHITECTURE=x86
+OS=Windows_NT
+ComSpec=C:\WINDOWS\system32\cmd.exe
+SystemDrive=C:
+windir=C:\WINDOWS
+OneDriveConsumer=C:\Users\hecto\OneDrive
+ALLUSERSPROFILE=C:\ProgramData
+
+
+------------
+Diagnostic: File system
+Skipped: False
+Success: True
+Exception: None
+Log:
+Temporary directory is 'C:\Users\hecto\AppData\Local\Temp\'...
+Checking basic file I/O...
+Writing to temporary file 'C:\Users\hecto\AppData\Local\Temp\3f564bd398a92120d1fd42a2'... OK
+Reading from temporary file 'C:\Users\hecto\AppData\Local\Temp\3f564bd398a92120d1fd42a2'... OK
+Deleting temporary file 'C:\Users\hecto\AppData\Local\Temp\3f564bd398a92120d1fd42a2'... OK
+Testing IFileSystem instance...
+UserHomePath: C:\Users\hecto
+UserDataDirectoryPath: C:\Users\hecto\.gcm
+GetCurrentDirectory(): C:\Users\hecto\OneDrive\Documentos\webpagehhh-main\webpagehhh-main
+
