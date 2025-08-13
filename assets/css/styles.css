@@ -250,7 +250,7 @@ body.dark-theme {
 }
 /* CTA de contacto */
 .contact-cta { margin-top: 3rem; }
-.contact-cta__box { background: var(--container-color); border: 1px solid hsl(var(--hue), 8%, 90%); border-radius: calc(var(--radius) + .25rem); padding: 2rem; box-shadow: 0 8px 24px hsla(var(--hue), var(--sat), var(--lig), .08); text-align: center; }
+.contact-cta__box { background: transparent; border: none; border-radius: calc(var(--radius) + .25rem); padding: 2rem; box-shadow: none; text-align: center; }
 .contact-cta__actions { display: flex; gap: .75rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap; }
 
 /* Cabeceras de sección */
