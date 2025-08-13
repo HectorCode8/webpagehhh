@@ -324,7 +324,24 @@ if (backToTop) {
   } else {
     run();
   }
-  window.addEventListener('resize', () => { dpr = Math.min(window.devicePixelRatio || 1, 2); start(); });
+  // Redimensionar sin reiniciar partículas (evita "reinicios" al hacer scroll en móvil)
+  let resizeTick = 0;
+  function handleResize() {
+    resizeTick = 0;
+    const newDpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Solo ajustar si cambió dpr o dimensiones efectivas
+    const cw = canvas.clientWidth || canvas.offsetWidth || window.innerWidth;
+    const ch = canvas.clientHeight || canvas.offsetHeight || window.innerHeight;
+    if (newDpr !== dpr || cw !== width || ch !== height) {
+      dpr = newDpr;
+      resize();
+      // No recreamos partículas ni cancelamos el loop: continuidad suave
+    }
+  }
+  window.addEventListener('resize', () => {
+    if (resizeTick) cancelAnimationFrame(resizeTick);
+    resizeTick = requestAnimationFrame(handleResize);
+  });
   // Al cambiar tema no es necesario recrear partículas, solo se repintan con el nuevo color en cada frame
   const obs = new MutationObserver(() => {/* noop: color se toma por frame */});
   obs.observe(document.body, { attributes: true, attributeFilter: ['class'] });
