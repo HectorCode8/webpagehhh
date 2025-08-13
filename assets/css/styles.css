@@ -228,12 +228,14 @@ body.dark-theme {
 .skills__content { row-gap: 3.5rem; }
 .skills__title { font-size: var(--h3-font-size); text-align: center; margin-bottom: 1.5rem; }
 .skills__box { display: flex; justify-content: center; column-gap: 3rem; }
+/* Centrado de todo el contenido de Habilidades */
 .skills__group { display: grid; align-content: flex-start; row-gap: 1rem; }
-.skills__data { display: flex; column-gap: .5rem; }
+.skills__data { display: flex; column-gap: .5rem; align-items: center; }
+.skills__data > div { text-align: left; }
 .skills__data i { font-size: 1rem; color: var(--first-color); }
 .skills__name { font-size: var(--normal-font-size); font-weight: 500; line-height: 18px; }
 .skills__level { font-size: var(--smaller-font-size); }
-.skill-meter { position: relative; height: .4rem; border-radius: 999px; background: var(--text-color-lighten); overflow: hidden; margin-top: .35rem; }
+.skill-meter { position: relative; height: .4rem; border-radius: 999px; background: var(--text-color-lighten); overflow: hidden; margin-top: .35rem; width: 100%; margin-left: 0; margin-right: 0; }
 .skill-meter__fill { height: 100%; background: linear-gradient(90deg, var(--first-color) 0%, var(--first-color-alt) 100%); width: 0; transition: width .7s cubic-bezier(.2,.6,.2,1); }
 .skill-meter--active .skill-meter__fill { width: var(--level, 70%); }
 @media (prefers-reduced-motion: no-preference) {
@@ -372,6 +374,16 @@ body.dark-theme {
   .filters__content { width: min(100%, 360px); margin: 3rem auto; }
   .skills__content { grid-template-columns: repeat(2, 332px); }
   .skills__content { justify-content: center; column-gap: 3rem; }
+}
+
+/* Mejor centrado en móviles: apilar columnas de habilidades */
+@media screen and (max-width: 575.98px) {
+  .skills__area { text-align: center; }
+  .skills__box { flex-direction: column; align-items: center; row-gap: 1.1rem; }
+  .skills__group { width: 100%; justify-items: center; }
+  .skills__data { justify-content: center; }
+  .skills__data > div { text-align: center; }
+  .skill-meter { width: min(240px, 80vw); }
 }
 
 
