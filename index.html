@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4340906693492682"
-      crossorigin="anonymous"
-    ></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
@@ -150,15 +145,15 @@
 
         <div class="profile__info grid">
           <div class="profile__info-group">
-            <h3 class="profile__info-number">4</h3>
+            <h3 class="profile__info-number">6</h3>
             <p class="profile__info-description">Años de <br />experiencia</p>
           </div>
           <div class="profile__info-group">
-            <h3 class="profile__info-number">+25</h3>
+            <h3 class="profile__info-number">+45</h3>
             <p class="profile__info-description">Proyectos <br />completados</p>
           </div>
           <div class="profile__info-group">
-            <h3 class="profile__info-number">+30</h3>
+            <h3 class="profile__info-number">+100</h3>
             <p class="profile__info-description">Clientes <br />satisfechos</p>
           </div>
         </div>
@@ -171,6 +166,15 @@
             class="button"
             >
             Descargar CV <i class="ri-download-line"></i>
+          </a>
+          <a
+            href="assets/pdf/CV Haro Hermosillo Hector.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="button button__gray"
+            aria-label="Ver CV en línea"
+          >
+            Ver CV <i class="ri-external-link-line"></i>
           </a>
 
           <div class="profile__buttons-small">
@@ -199,6 +203,8 @@
 
     <!--=============== MAIN ===============-->
   <main id="main-content" class="main">
+      <!-- Tira de habilidades destacadas -->
+      
       <section class="filters container">
         <ul class="filters__content" role="tablist" aria-label="Contenido del portafolio">
           <button
@@ -210,7 +216,8 @@
             aria-selected="true"
             tabindex="0"
           >
-            Proyectos
+            <i class="ri-apps-2-line" aria-hidden="true"></i>
+            <span>Proyectos</span>
           </button>
           <button
             role="tab"
@@ -221,7 +228,8 @@
             aria-selected="false"
             tabindex="-1"
           >
-            Habilidades
+            <i class="ri-tools-line" aria-hidden="true"></i>
+            <span>Habilidades</span>
           </button>
         </ul>
 
@@ -235,6 +243,10 @@
             aria-labelledby="tab-projects"
             tabindex="0"
           >
+            <header class="section__header">
+              <h2 class="section__title">Proyectos destacados</h2>
+              <p class="section__subtitle">Algunas de las soluciones que he construido recientemente.</p>
+            </header>
 
             <article class="projects__card" data-href="https://hhhcryptoapp.vercel.app/" role="link" tabindex="0" aria-label="Abrir Crypto App">
               <img
@@ -246,11 +258,15 @@
                 height="500"
                 class="projects__img"
               />
-
               <div class="projects__modal">
                 <div>
                   <span class="projects__subtitle">Responsivo</span>
                   <h3 class="projects__title">Crypto App</h3>
+                  <div class="projects__chips" aria-label="Tecnologías usadas">
+                    <span class="chip">React</span>
+                    <span class="chip">API</span>
+                    <span class="chip">CSS</span>
+                  </div>
                   <a
                     href="https://hhhcryptoapp.vercel.app/"
                     class="projects__button button button__small"
@@ -272,11 +288,15 @@
                 height="500"
                 class="projects__img"
               />
-
               <div class="projects__modal">
                 <div>
-                  <span class="projects__subtitle">Web</span>
+                  <span class="projects__subtitle">Responsivo</span>
                   <h3 class="projects__title">Veterinary App</h3>
+                  <div class="projects__chips" aria-label="Tecnologías usadas">
+                    <span class="chip">React</span>
+                    <span class="chip">Vite</span>
+                    <span class="chip">CSS</span>
+                  </div>
                   <a
                     href="https://mascotasapp.netlify.app/"
                     class="projects__button button button__small"
@@ -298,11 +318,15 @@
                 height="500"
                 class="projects__img"
               />
-
               <div class="projects__modal">
                 <div>
                   <span class="projects__subtitle">Responsivo</span>
                   <h3 class="projects__title">Covid App</h3>
+                  <div class="projects__chips" aria-label="Tecnologías usadas">
+                    <span class="chip">React</span>
+                    <span class="chip">API</span>
+                    <span class="chip">CSS</span>
+                  </div>
                   <a
                     href="https://covidapp2025.netlify.app/"
                     class="projects__button button button__small"
@@ -324,11 +348,15 @@
                 height="500"
                 class="projects__img"
               />
-
               <div class="projects__modal">
                 <div>
                   <span class="projects__subtitle">Responsivo</span>
                   <h3 class="projects__title">Weather app</h3>
+                  <div class="projects__chips" aria-label="Tecnologías usadas">
+                    <span class="chip">Vanilla JS</span>
+                    <span class="chip">API</span>
+                    <span class="chip">CSS</span>
+                  </div>
                   <a
                     href="https://new-weather-app22.vercel.app/"
                     class="projects__button button button__small"
@@ -350,11 +378,15 @@
                 height="500"
                 class="projects__img"
               />
-
               <div class="projects__modal">
                 <div>
-                  <span class="projects__subtitle">Responsive</span>
+                  <span class="projects__subtitle">Responsivo</span>
                   <h3 class="projects__title">Crypto Search</h3>
+                  <div class="projects__chips" aria-label="Tecnologías usadas">
+                    <span class="chip">React</span>
+                    <span class="chip">Vite</span>
+                    <span class="chip">CSS</span>
+                  </div>
                   <a
                     href="https://crypto-cotizacion.vercel.app/"
                     class="projects__button button button__small"
@@ -375,6 +407,10 @@
             aria-labelledby="tab-skills"
             tabindex="0"
           >
+            <header class="section__header">
+              <h2 class="section__title">Habilidades</h2>
+              <p class="section__subtitle">Tecnologías y herramientas con las que trabajo.</p>
+            </header>
             <div class="skills__area">
               <h3 class="skills__title">Frontend</h3>
 
@@ -386,6 +422,9 @@
                     <div>
                       <h3 class="skills__name">HTML</h3>
                       <span class="skills__level">Avanzado</span>
+                      <div class="skill-meter" style="--level: 95%">
+                        <div class="skill-meter__fill"></div>
+                      </div>
                     </div>
                   </div>
 
@@ -395,6 +434,9 @@
                     <div>
                       <h3 class="skills__name">CSS</h3>
                       <span class="skills__level">Avanzado</span>
+                      <div class="skill-meter" style="--level: 90%">
+                        <div class="skill-meter__fill"></div>
+                      </div>
                     </div>
                   </div>
 
@@ -404,6 +446,9 @@
                     <div>
                       <h3 class="skills__name">JavaScript</h3>
                       <span class="skills__level">Avanzado</span>
+                      <div class="skill-meter" style="--level: 88%">
+                        <div class="skill-meter__fill"></div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -414,7 +459,10 @@
 
                     <div>
                       <h3 class="skills__name">React</h3>
-                      <span class="skills__level">Advanced</span>
+                      <span class="skills__level">Avanzado</span>
+                      <div class="skill-meter" style="--level: 86%">
+                        <div class="skill-meter__fill"></div>
+                      </div>
                     </div>
                   </div>
 
@@ -423,7 +471,10 @@
 
                     <div>
                       <h3 class="skills__name">Bootstrap</h3>
-                      <span class="skills__level">Intermediate</span>
+                      <span class="skills__level">Intermedio</span>
+                      <div class="skill-meter" style="--level: 70%">
+                        <div class="skill-meter__fill"></div>
+                      </div>
                     </div>
                   </div>
 
@@ -432,7 +483,10 @@
 
                     <div>
                       <h3 class="skills__name">Git</h3>
-                      <span class="skills__level">Advanced</span>
+                      <span class="skills__level">Avanzado</span>
+                      <div class="skill-meter" style="--level: 85%">
+                        <div class="skill-meter__fill"></div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -450,6 +504,9 @@
                     <div>
                       <h3 class="skills__name">Redux</h3>
                       <span class="skills__level">Intermedio</span>
+                      <div class="skill-meter" style="--level: 72%">
+                        <div class="skill-meter__fill"></div>
+                      </div>
                     </div>
                   </div>
 
@@ -459,6 +516,9 @@
                     <div>
                       <h3 class="skills__name">React Router</h3>
                       <span class="skills__level">Intermedio</span>
+                      <div class="skill-meter" style="--level: 74%">
+                        <div class="skill-meter__fill"></div>
+                      </div>
                     </div>
                   </div>
 
@@ -468,6 +528,9 @@
                     <div>
                       <h3 class="skills__name">Adobe Photoshop</h3>
                       <span class="skills__level">Avanzado</span>
+                      <div class="skill-meter" style="--level: 80%">
+                        <div class="skill-meter__fill"></div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -479,6 +542,9 @@
                     <div>
                       <h3 class="skills__name">MySQL</h3>
                       <span class="skills__level">Básico</span>
+                      <div class="skill-meter" style="--level: 45%">
+                        <div class="skill-meter__fill"></div>
+                      </div>
                     </div>
                   </div>
 
@@ -489,6 +555,9 @@
                       <div>
                         <h3 class="skills__name">Node.js</h3>
                         <span class="skills__level">Intermedio</span>
+                        <div class="skill-meter" style="--level: 68%">
+                          <div class="skill-meter__fill"></div>
+                        </div>
                       </div>
                     </div>
 
@@ -498,6 +567,9 @@
                       <div>
                         <h3 class="skills__name">Adobe Premiere</h3>
                         <span class="skills__level">Intermedio</span>
+                        <div class="skill-meter" style="--level: 60%">
+                          <div class="skill-meter__fill"></div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -507,6 +579,8 @@
           </div>
         </div>
       </section>
+      <!-- CTA de contacto -->
+      
     </main>
 
     <!--=============== FOOTER ===============-->

@@ -14,6 +14,18 @@ function activateTab(tab) {
     target.classList.add('filters__active');
     target.removeAttribute('hidden');
     target.focus({ preventScroll: true });
+    // Animar barras de habilidad si es el panel de skills
+    const isSkills = target.id === 'skills';
+    const meters = document.querySelectorAll('#skills .skill-meter');
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (isSkills) {
+      meters.forEach((m, idx) => {
+        const apply = () => m.classList.add('skill-meter--active');
+        if (!reduce) setTimeout(apply, 80 * idx); else apply();
+      });
+    } else {
+      meters.forEach((m) => m.classList.remove('skill-meter--active'));
+    }
   }
   // Actualizar tabs
   tabs.forEach((t) => {
@@ -25,6 +37,13 @@ function activateTab(tab) {
   tab.setAttribute('aria-selected', 'true');
   tab.setAttribute('tabindex', '0');
   tab.focus({ preventScroll: true });
+  // Mover indicador deslizante del segmented control
+  const parent = tab.parentElement;
+  if (parent && parent.classList.contains('filters__content')) {
+    const index = Array.from(parent.querySelectorAll('[role="tab"]')).indexOf(tab);
+    const x = index * 100; // 0% para el primero, 100% para el segundo
+    parent.style.setProperty('--seg-x', `${x}%`);
+  }
 }
 
 tabs.forEach((tab) => {
@@ -59,7 +78,23 @@ if (tabList) {
     }
     activateTab(tabs[newIndex]);
   });
+  // Inicializar posición del indicador al cargar
+  const current = Array.from(tabs).find((t) => t.getAttribute('aria-selected') === 'true') || tabs[0];
+  if (current) activateTab(current);
 }
+
+// Al cambiar de tab fuera de teclado/click inicial, si salimos de skills, limpiar animaciones para re-animar cuando volvamos
+document.addEventListener('click', (e) => {
+  const isTab = e.target.closest && e.target.closest('[role="tab"]');
+  if (isTab) {
+    const targetSel = isTab.getAttribute('data-target');
+    const isSkills = targetSel === '#skills';
+    const skillsPanel = document.querySelector('#skills');
+    if (skillsPanel && !isSkills) {
+      skillsPanel.querySelectorAll('.skill-meter').forEach(m => m.classList.remove('skill-meter--active'));
+    }
+  }
+});
 
 /*=============== DARK LIGHT THEME ===============*/
 const themeButton = document.getElementById('theme-button');
@@ -85,7 +120,15 @@ if (themeButton) {
     // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
     document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
     themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme);
-  setThemeAria();
+    setThemeAria();
+  } else {
+    // Primera visita: respetar preferencia del sistema
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (prefersDark) {
+      document.body.classList.add(darkTheme);
+      themeButton.classList.add(iconTheme);
+      setThemeAria();
+    }
   }
 
   // Activate / deactivate the theme manually with the button
@@ -110,11 +153,12 @@ if (themeButton) {
 
 /*=============== SCROLL REVEAL ANIMATION ===============*/
 const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (!prefersReducedMotion && typeof ScrollReveal !== 'undefined') {
+const isSmallScreen = window.matchMedia && window.matchMedia('(max-width: 480px)').matches;
+if (!prefersReducedMotion && !isSmallScreen && typeof ScrollReveal !== 'undefined') {
   const sr = ScrollReveal({
     origin: 'top',
-    distance: '60px',
-    duration: 2500,
+  distance: '40px',
+  duration: 1100,
     delay: 400,
   });
 
@@ -124,8 +168,16 @@ if (!prefersReducedMotion && typeof ScrollReveal !== 'undefined') {
   sr.reveal(`.profile__social`, { delay: 700 });
   sr.reveal(`.profile__info-group`, { interval: 100, delay: 700 });
   sr.reveal(`.profile__buttons`, { delay: 800 });
+  // Tabs y encabezados
   sr.reveal(`.filters__content`, { delay: 900 });
   sr.reveal(`.filters`, { delay: 1000 });
+  sr.reveal(`.section__header`, { delay: 200 });
+  // Proyectos y chips con stagger
+  // Stagger sutil por grupos
+  sr.reveal(`.projects__card`, { interval: 120, origin: 'bottom' });
+  sr.reveal(`.projects__chips .chip`, { interval: 80, distance: '20px', origin: 'bottom' });
+  // Grupos de skills
+  sr.reveal(`.skills__group`, { interval: 120 });
 }
 
 /*=============== PROJECT CARDS CLICKABLE + KEYBOARD ===============*/
