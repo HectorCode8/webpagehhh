@@ -212,3 +212,120 @@ if (backToTop) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
+
+/*=============== PARALLAX PARTICLES (CANVAS) ===============*/
+(function initParticles() {
+  const canvas = document.getElementById('bg-particles');
+  if (!canvas) return;
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+
+  const ctx = canvas.getContext('2d');
+  let dpr = Math.min(window.devicePixelRatio || 1, 2);
+  let width, height; let particles = []; let animId;
+  const maxParticles = 70; // ligero
+  const linkDist = 110; // distancia máxima para conectar
+
+  function themeColor() {
+    const dark = document.body.classList.contains('dark-theme');
+    return dark ? 'rgba(255,255,255,0.14)' : 'rgba(2, 20, 40, 0.22)';
+  }
+
+  function resize() {
+    // Tomar tamaño del viewport si el canvas aún no reporta medidas
+    const cw = canvas.clientWidth || canvas.offsetWidth || window.innerWidth;
+    const ch = canvas.clientHeight || canvas.offsetHeight || window.innerHeight;
+    width = cw; height = ch;
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function createParticles() {
+    particles = Array.from({ length: maxParticles }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      r: Math.random() * 1.8 + 0.6,
+      vx: (Math.random() - 0.5) * 0.2,
+      vy: (Math.random() - 0.5) * 0.2,
+      z: Math.random() * 1.5 + 0.5, // profundidad para parallax
+    }));
+  }
+
+  // Coordenadas del puntero: iniciar seguro y compatibles con touch (pointermove)
+  let mouse = { x: 0, y: 0 };
+  let hasPointer = false;
+  window.addEventListener('pointermove', (e) => {
+    // clientX/Y ya vienen normalizados para pointer events
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    hasPointer = true;
+  }, { passive: true });
+
+  function step() {
+    ctx.clearRect(0, 0, width, height);
+    const fillCol = themeColor();
+    ctx.fillStyle = fillCol;
+    const dark = document.body.classList.contains('dark-theme');
+    const lineColor = dark ? '#FFFFFF' : '#021428';
+    for (const p of particles) {
+  // parallax sutil respecto al puntero (centrado si no hay interacción)
+  const mx = hasPointer ? mouse.x : width / 2;
+  const my = hasPointer ? mouse.y : height / 2;
+  const parx = (mx - width / 2) * 0.003 * p.z;
+  const pary = (my - height / 2) * 0.003 * p.z;
+      p.x += p.vx + parx; p.y += p.vy + pary;
+      if (p.x < -10) p.x = width + 10; if (p.x > width + 10) p.x = -10;
+      if (p.y < -10) p.y = height + 10; if (p.y > height + 10) p.y = -10;
+
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+    }
+    // Conexiones entre partículas cercanas (doble bucle optimizado)
+    ctx.lineWidth = 0.8;
+    for (let i = 0; i < particles.length; i++) {
+      const a = particles[i];
+      for (let j = i + 1; j < particles.length; j++) {
+        const b = particles[j];
+        const dx = b.x - a.x; const dy = b.y - a.y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < linkDist * linkDist) {
+          const d = Math.sqrt(d2);
+          const t = 1 - d / linkDist; // 0..1
+          const baseAlpha = dark ? 0.14 : 0.18; // muy sutil
+          const alpha = baseAlpha * t * t; // desvanecimiento rápido
+          ctx.save();
+          ctx.globalAlpha = alpha;
+          ctx.strokeStyle = lineColor;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+    }
+    animId = requestAnimationFrame(step);
+  }
+
+  function start() {
+    resize();
+    // Centrar puntero por defecto para evitar NaN en el primer frame
+    hasPointer = false;
+    mouse.x = width / 2;
+    mouse.y = height / 2;
+    createParticles();
+    cancelAnimationFrame(animId);
+    step();
+  }
+  // Esperar a que el layout esté listo antes de arrancar
+  const run = () => requestAnimationFrame(start);
+  if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', run, { once: true });
+  } else {
+    run();
+  }
+  window.addEventListener('resize', () => { dpr = Math.min(window.devicePixelRatio || 1, 2); start(); });
+  // Al cambiar tema no es necesario recrear partículas, solo se repintan con el nuevo color en cada frame
+  const obs = new MutationObserver(() => {/* noop: color se toma por frame */});
+  obs.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+})();
