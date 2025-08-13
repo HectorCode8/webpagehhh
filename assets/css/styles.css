@@ -136,11 +136,11 @@ body.dark-theme {
 .profile__container { row-gap: 2rem; }
 .profile__data { display: grid; text-align: center; }
 .profile__perfil {
-  width: 100px; height: 100px;
+  width: 92%; height: 92%; aspect-ratio: 1 / 1;
   background: linear-gradient(180deg, hsla(var(--hue), var(--sat), var(--lig), 1) 0%, hsla(var(--hue), var(--sat), var(--lig), .2) 100%);
-  border-radius: 50%; overflow: hidden; display: flex; align-items: flex-end; justify-content: center; position: relative;
+  border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative;
 }
-.profile__perfil img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .6s cubic-bezier(.2,.6,.2,1); will-change: transform; }
+.profile__perfil img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; transition: transform .6s cubic-bezier(.2,.6,.2,1); will-change: transform; }
 @media (prefers-reduced-motion: no-preference) {
   .profile__border:hover .profile__perfil img,
   .profile__perfil:hover img { transform: scale(1.08); }
@@ -384,8 +384,8 @@ body.dark-theme {
   .container { margin-left: auto; margin-right: auto; }
   .change-theme { top: 2.5rem; right: 2.5rem; }
   .profile { padding-top: 4rem; }
-  .profile__border { width: 150px; height: 150px; margin-bottom: 1rem; }
-  .profile__perfil { width: 135px; height: 135px; }
+  .profile__border { width: 150px; height: 150px; margin-bottom: 1rem; border-radius: 50%; }
+  .profile__perfil { width: 92%; height: 92%; aspect-ratio: 1 / 1; border-radius: 50%; }
   .profile__profession { margin-bottom: 1.5rem; }
   .profile__info { column-gap: 3rem; }
   .profile__info-description { font-size: var(--small-font-size); }

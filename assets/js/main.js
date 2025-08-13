@@ -178,6 +178,8 @@ if (!prefersReducedMotion && !isSmallScreen && typeof ScrollReveal !== 'undefine
   sr.reveal(`.projects__chips .chip`, { interval: 80, distance: '20px', origin: 'bottom' });
   // Grupos de skills
   sr.reveal(`.skills__group`, { interval: 120 });
+  // Contact CTA
+  sr.reveal(`.contact-cta__box`, { origin: 'bottom', distance: '30px', delay: 150 });
 }
 
 /*=============== PROJECT CARDS CLICKABLE + KEYBOARD ===============*/
