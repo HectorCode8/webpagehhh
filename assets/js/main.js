@@ -227,6 +227,8 @@ if (backToTop) {
   const linkDist = 110; // distancia máxima para conectar
   const hoverRadius = 56; // radio de interacción del imán (px) — ampliado
   const magnetStrength = 0.12 * 1.15; // +15% intensidad del imán
+  const magnetMaxImpulse = 0.06; // tope por frame a la aceleración del imán
+  const magnetMaxSpeed = 0.38;   // velocidad máxima permitida bajo influencia del imán
 
   function themeColor() {
     const dark = document.body.classList.contains('dark-theme');
@@ -304,11 +306,25 @@ if (backToTop) {
           const t = 1 - d / hoverRadius; // cercanía 0..1
           const f = (magnetStrength * t) / (p.z + 0.2); // ajustar por profundidad para sensación natural
           const nx = dxp / d; const ny = dyp / d; // normalizada hacia el puntero
-          p.vx += nx * f;
-          p.vy += ny * f;
-          // Suave amortiguación para no crecer la velocidad indefinidamente
-          p.vx *= 0.995;
-          p.vy *= 0.995;
+          // Impulso limitado por frame
+          let ivx = nx * f;
+          let ivy = ny * f;
+          const im = Math.hypot(ivx, ivy);
+          if (im > magnetMaxImpulse) {
+            ivx = (ivx / im) * magnetMaxImpulse;
+            ivy = (ivy / im) * magnetMaxImpulse;
+          }
+          p.vx += ivx;
+          p.vy += ivy;
+          // Limitar velocidad total bajo influencia del imán
+          const sp = Math.hypot(p.vx, p.vy);
+          if (sp > magnetMaxSpeed) {
+            p.vx = (p.vx / sp) * magnetMaxSpeed;
+            p.vy = (p.vy / sp) * magnetMaxSpeed;
+          }
+          // Amortiguación un poco más fuerte para suavizar
+          p.vx *= 0.992;
+          p.vy *= 0.992;
         }
       }
       if (p.x < -10) p.x = width + 10; if (p.x > width + 10) p.x = -10;
