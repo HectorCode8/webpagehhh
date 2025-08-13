@@ -225,6 +225,8 @@ if (backToTop) {
   let width, height; let particles = []; let animId;
   const maxParticles = 70; // ligero
   const linkDist = 110; // distancia máxima para conectar
+  const hoverRadius = 56; // radio de interacción del imán (px) — ampliado
+  const magnetStrength = 0.12 * 1.15; // +15% intensidad del imán
 
   function themeColor() {
     const dark = document.body.classList.contains('dark-theme');
@@ -246,39 +248,75 @@ if (backToTop) {
       x: Math.random() * width,
       y: Math.random() * height,
       r: Math.random() * 1.8 + 0.6,
-      vx: (Math.random() - 0.5) * 0.2,
-      vy: (Math.random() - 0.5) * 0.2,
+  // +15% más rápidos respecto al ajuste previo
+  vx: (Math.random() - 0.5) * 0.299,
+  vy: (Math.random() - 0.5) * 0.299,
       z: Math.random() * 1.5 + 0.5, // profundidad para parallax
     }));
   }
 
-  // Coordenadas del puntero: iniciar seguro y compatibles con touch (pointermove)
-  let mouse = { x: 0, y: 0 };
-  let hasPointer = false;
-  window.addEventListener('pointermove', (e) => {
-    // clientX/Y ya vienen normalizados para pointer events
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-    hasPointer = true;
-  }, { passive: true });
+  // Parallax autónomo (sin mouse): cámara virtual que se desplaza suavemente con el tiempo
+  let timeMs = 0;
+  let lastTs = 0;
+  // Puntero para interacción local (imán)
+  const pointer = { x: 0, y: 0, active: false };
+  const onPointerMove = (e) => { pointer.x = e.clientX; pointer.y = e.clientY; pointer.active = true; };
+  const onPointerLeave = () => { pointer.active = false; };
+  // Usar listeners globales porque el canvas tiene pointer-events: none
+  window.addEventListener('pointermove', onPointerMove, { passive: true });
+  window.addEventListener('pointerdown', onPointerMove, { passive: true });
+  window.addEventListener('pointerleave', onPointerLeave, { passive: true });
+  document.addEventListener('mouseleave', onPointerLeave, { passive: true });
+  window.addEventListener('blur', onPointerLeave);
 
-  function step() {
+  function step(ts) {
+    // Delta de tiempo para movimiento suave entre frames
+    if (typeof ts === 'number') {
+      if (!lastTs) lastTs = ts;
+      const dt = Math.min(64, Math.max(10, ts - lastTs)); // acotar dt 10..64ms
+      lastTs = ts;
+      timeMs += dt;
+    } else {
+      timeMs += 16;
+    }
+
     ctx.clearRect(0, 0, width, height);
     const fillCol = themeColor();
     ctx.fillStyle = fillCol;
     const dark = document.body.classList.contains('dark-theme');
     const lineColor = dark ? '#FFFFFF' : '#021428';
+
+    // Cámara virtual que produce un offset suave dependiente de la profundidad (parallax)
+  // Parallax +15% en amplitud y velocidad
+  const camX = Math.sin(timeMs * 0.000575) * 32.2; // px
+  const camY = Math.cos(timeMs * 0.00046) * 25.3; // px
     for (const p of particles) {
-  // parallax sutil respecto al puntero (centrado si no hay interacción)
-  const mx = hasPointer ? mouse.x : width / 2;
-  const my = hasPointer ? mouse.y : height / 2;
-  const parx = (mx - width / 2) * 0.003 * p.z;
-  const pary = (my - height / 2) * 0.003 * p.z;
-      p.x += p.vx + parx; p.y += p.vy + pary;
+      // Posición base aleatoria + drift propio
+      p.x += p.vx; p.y += p.vy;
+      // Interacción local: si el puntero está cerca (en coordenadas de dibujo), aplicar atracción
+      if (pointer.active) {
+        const dxp = pointer.x - (p.x + camX * p.z);
+        const dyp = pointer.y - (p.y + camY * p.z);
+        const d2p = dxp * dxp + dyp * dyp;
+        const r2 = hoverRadius * hoverRadius;
+        if (d2p > 0 && d2p < r2) {
+          const d = Math.sqrt(d2p);
+          const t = 1 - d / hoverRadius; // cercanía 0..1
+          const f = (magnetStrength * t) / (p.z + 0.2); // ajustar por profundidad para sensación natural
+          const nx = dxp / d; const ny = dyp / d; // normalizada hacia el puntero
+          p.vx += nx * f;
+          p.vy += ny * f;
+          // Suave amortiguación para no crecer la velocidad indefinidamente
+          p.vx *= 0.995;
+          p.vy *= 0.995;
+        }
+      }
       if (p.x < -10) p.x = width + 10; if (p.x > width + 10) p.x = -10;
       if (p.y < -10) p.y = height + 10; if (p.y > height + 10) p.y = -10;
 
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      const drawX = p.x + camX * p.z;
+      const drawY = p.y + camY * p.z;
+      ctx.beginPath(); ctx.arc(drawX, drawY, p.r, 0, Math.PI * 2); ctx.fill();
     }
     // Conexiones entre partículas cercanas (doble bucle optimizado)
     ctx.lineWidth = 0.8;
@@ -286,7 +324,9 @@ if (backToTop) {
       const a = particles[i];
       for (let j = i + 1; j < particles.length; j++) {
         const b = particles[j];
-        const dx = b.x - a.x; const dy = b.y - a.y;
+        const ax = a.x + camX * a.z; const ay = a.y + camY * a.z;
+        const bx = b.x + camX * b.z; const by = b.y + camY * b.z;
+        const dx = bx - ax; const dy = by - ay;
         const d2 = dx * dx + dy * dy;
         if (d2 < linkDist * linkDist) {
           const d = Math.sqrt(d2);
@@ -297,8 +337,8 @@ if (backToTop) {
           ctx.globalAlpha = alpha;
           ctx.strokeStyle = lineColor;
           ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
+          ctx.moveTo(ax, ay);
+          ctx.lineTo(bx, by);
           ctx.stroke();
           ctx.restore();
         }
@@ -309,10 +349,8 @@ if (backToTop) {
 
   function start() {
     resize();
-    // Centrar puntero por defecto para evitar NaN en el primer frame
-    hasPointer = false;
-    mouse.x = width / 2;
-    mouse.y = height / 2;
+    // Reiniciar tiempo de cámara para continuidad
+    lastTs = 0;
     createParticles();
     cancelAnimationFrame(animId);
     step();
